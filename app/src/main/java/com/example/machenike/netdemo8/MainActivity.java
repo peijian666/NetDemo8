@@ -15,6 +15,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,12 +35,23 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked() {
         //创建OkHttpClient核心类
         OkHttpClient httpClient = new OkHttpClient();
+        //--------------------get请求----------------------
         //构建请求
+//        Request request = new Request.Builder()
+//                .url("https://api.github.com/search/repositories?q=language:java&page=1")
+//                .get()
+//                .build();
+        //------------------post请求-----------------------
+        //构建请求体
+        RequestBody requestBody = RequestBody.create(null, "{\n" +
+                "\"Password\":\"654321\",\n" +
+                "\"UserName\":\"qjd\"\n" +
+                "}");
         Request request = new Request.Builder()
-                .url("https://api.github.com/search/repositories?q=language:java&page=1")
-                .get()
-                .header("123", "321")
+                .url("http://admin.syfeicuiedu.com/Handler/UserHandler.ashx?action=register")
+                .post(requestBody)
                 .build();
+
         //发送请求
         //httpClient.newCall(request).execute()  同步请求
         httpClient.newCall(request).enqueue(new Callback() {
@@ -51,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             //成功
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d("TAG","响应数据：头："+response.header("123")+"响应体"+response.body().string());
+                Log.d("TAG","响应数据:"+"响应体"+response.body().string());
             }
         });
 
