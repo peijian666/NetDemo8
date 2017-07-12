@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.machenike.netdemo8.MainActivity">
 
     <Button
@@ -33,4 +34,9 @@
         android:layout_height="wrap_content"
         android:text="可以刷新UI的Callback"/>
 
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到RetrofitActivity"/>
 </LinearLayout>

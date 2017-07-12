@@ -1,5 +1,6 @@
 package com.example.machenike.netdemo8;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnMultiPart;
     @BindView(R.id.btn_uicallback)
     Button mBtnUicallback;
+    @BindView(R.id.skip)
+    Button mSkip;
     private Unbinder mUnbinder;
     Handler mHandler = new Handler();
 
@@ -167,12 +170,19 @@ public class MainActivity extends AppCompatActivity {
         OkHttpNetClient.getInstance().getRequest().enqueue(new UiCallback() {
             @Override
             public void onResponseInUi(Call call, Response response) throws IOException {
-                Toast.makeText(MainActivity.this,"成功了"+response.code(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "成功了" + response.code(), Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailureInUi(Call call, IOException e) {
-                Toast.makeText(MainActivity.this,"失败了",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "失败了", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @OnClick(R.id.skip)
+    public void skip() {
+        Intent intent = new Intent(this, RetrofitActivity.class);
+        startActivity(intent);
     }
 }

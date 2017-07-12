@@ -32,6 +32,7 @@ public abstract class UiCallback implements Callback{
 
     @Override
     public void onResponse(final Call call, final Response response) throws IOException {
+       //后台线程
         mHandler.post(new Runnable() {
             @Override
             public void run() {
