@@ -12,4 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="retrofit的get请求"/>
+    <Button
+        android:id="@+id/btn_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="retrofit的post请求"/>
+    <Button
+        android:id="@+id/btn_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="retrofit的表单请求"/>
+    <Button
+        android:id="@+id/btn_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="retrofit的多部分请求"/>
 </LinearLayout>
