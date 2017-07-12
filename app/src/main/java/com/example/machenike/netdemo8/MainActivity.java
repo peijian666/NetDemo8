@@ -1,9 +1,13 @@
 package com.example.machenike.netdemo8;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -25,13 +29,17 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnForm;
     @BindView(R.id.btn_multiPart)
     Button mBtnMultiPart;
+    @BindView(R.id.btn_uicallback)
+    Button mBtnUicallback;
     private Unbinder mUnbinder;
+    Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mUnbinder = ButterKnife.bind(this);
+        ButterKnife.bind(this);
+
     }
 
     @OnClick(R.id.btn_get)
@@ -89,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.d("Get", response.body().string());
+
             }
         });
     }
@@ -101,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_post)
     public void post() {
-        OkHttpNetClient.getInstance().postRequest().enqueue(new Callback() {
+        OkHttpNetClient.getInstance().postRequest(new User("654321", "qjd")).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("POST", "失败了");
@@ -110,7 +119,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                Log.d("POST", response.body().string());
+                if (response.isSuccessful()) {
+                    String body = response.body().string();
+                    Gson gson = new Gson();
+                    UserResult userResult = gson.fromJson(body, UserResult.class);
+                    Log.e("POST", userResult.getErrmsg());
+
+                }
             }
         });
     }
@@ -126,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.d("Biaodan", response.body().string());
+
             }
         });
     }
@@ -141,6 +157,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.d("multiPart", response.body().string());
+            }
+        });
+    }
+
+    @OnClick(R.id.btn_uicallback)
+
+    public void uiCallback() {
+        OkHttpNetClient.getInstance().getRequest().enqueue(new UiCallback() {
+            @Override
+            public void onResponseInUi(Call call, Response response) throws IOException {
+                Toast.makeText(MainActivity.this,"成功了"+response.code(),Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailureInUi(Call call, IOException e) {
+                Toast.makeText(MainActivity.this,"失败了",Toast.LENGTH_SHORT).show();
             }
         });
     }

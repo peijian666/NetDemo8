@@ -1,5 +1,7 @@
 package com.example.machenike.netdemo8;
 
+import com.google.gson.Gson;
+
 import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.MultipartBody;
@@ -31,11 +33,14 @@ public class OkHttpNetClient {
         return mOkHttpNetClient;
     }
 
-    public Call postRequest(){
-        RequestBody requestBody = RequestBody.create(null, "{\n" +
-                "\"Password\":\"654321\",\n" +
-                "\"UserName\":\"qjd\"\n" +
-                "}");
+    public Call postRequest(User user){
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+//        RequestBody requestBody = RequestBody.create(null, "{\n" +
+//                "\"Password\":\"654321\",\n" +
+//                "\"UserName\":\"qjd\"\n" +
+//                "}");
+        RequestBody requestBody = RequestBody.create(null, json);
         Request request = new Request.Builder()
                 .url("http://admin.syfeicuiedu.com/Handler/UserHandler.ashx?action=register")
                 .post(requestBody)
@@ -80,6 +85,4 @@ public class OkHttpNetClient {
                 .build();
         return mClient.newCall(request);
     }
-
-
 }
