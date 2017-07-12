@@ -55,20 +55,22 @@ public class RetrofitActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_post)
     public void post() {
-        RequestBody requestBody = RequestBody.create(null, "{\n" +
+        /*RequestBody requestBody = RequestBody.create(null, "{\n" +
                 "\"Password\":\"654321\"\n" +
                 "\"UserName\":\"qjd\",\n" +
-                "}");
-        RetrofitNetClient.getInstance().getRetrofitApi().postRetrofit(requestBody).enqueue(new Callback<ResponseBody>() {
+                "}");*/
+        User user = new User("654321", "qjd");
+        RetrofitNetClient.getInstance().getRetrofitApi().postRetrofit(user).enqueue(new Callback<UserResult>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<UserResult> call, Response<UserResult> response) {
                 Toast.makeText(RetrofitActivity.this, "成功了" + response.code(), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(RetrofitActivity.this, "失败了", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<UserResult> call, Throwable t) {
+                Toast.makeText(RetrofitActivity.this, "失败", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

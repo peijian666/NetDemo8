@@ -25,7 +25,7 @@ public interface RetrofitApi {
 
     //post请求
     @POST(" http://admin.syfeicuiedu.com/Handler/UserHandler.ashx?action=register")
-    Call<ResponseBody> postRetrofit(@Body RequestBody requestBody);
+    Call<UserResult> postRetrofit(@Body User user);
 
     //表单请求
     @FormUrlEncoded

@@ -3,6 +3,7 @@ package com.example.machenike.netdemo8;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by MACHENIKE on 2017/7/12.
@@ -26,6 +27,7 @@ public class RetrofitNetClient {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com") //必须要写，方便跟后面的相对路径进行拼接，组成完整的URL(若发现后面的路径是绝对路径则不拼接)
                 .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
