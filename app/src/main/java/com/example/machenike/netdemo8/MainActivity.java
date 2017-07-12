@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_uicallback)
     Button mBtnUicallback;
     @BindView(R.id.skip)
-    Button mSkip;
+    Button skip;
+
     private Unbinder mUnbinder;
     Handler mHandler = new Handler();
 
@@ -185,4 +186,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RetrofitActivity.class);
         startActivity(intent);
     }
+
 }

@@ -36,4 +36,6 @@ public interface RetrofitApi {
     @Multipart
     @POST("http://wx.feicuiedu.com:9094/yitao/UserWeb?method=update")
     Call<ResponseBody> multiRetrofit(@Part("username")RequestBody username);
+
+
 }

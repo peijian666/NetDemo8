@@ -18,6 +18,7 @@ public abstract class UiCallback implements Callback{
     //Handler运行在哪个线程取决于Looper是哪个线程里面的Looper
     //得到运行在主线程里面的Handler
     Handler mHandler = new Handler(Looper.getMainLooper());
+
     @Override
     public void onFailure(final Call call, final IOException e) {
         //后台线程
@@ -49,5 +50,8 @@ public abstract class UiCallback implements Callback{
     public abstract void onResponseInUi(Call call, Response response) throws IOException;
     //运行在主线程的onResponseonFailure
     public abstract void onFailureInUi(Call call, IOException e);
+
+
+
 
 }
